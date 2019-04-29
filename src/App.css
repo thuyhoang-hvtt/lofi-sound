@@ -1,0 +1,73 @@
+@import '~antd/dist/antd.css';
+
+html {
+  background-color: rgb(64, 235, 141);
+}
+
+
+div.ant-col {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover.ant-layout {
+  background-color: rgb(64, 235, 141);
+}
+
+.ant-input :hover{
+  border-width: 0;
+}
+
+
+.anticon {
+  opacity: 0.5;
+}
+
+p {
+  font-size: 16px;
+}
+
+.shn-todo-item {
+  width: 100%;
+  height: 48px;
+  background-color: inherit;
+  border-bottom: 1px solid rgba(242,242,242, 0.5);
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.shn-todo-item div{
+  color: #fff;
+  padding-left: 16px;
+  text-align: left;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.shn-todo-item:hover {
+  background-color: rgba(255,255,255, 0.1);
+  cursor: pointer;
+}
+
+.shn-todo-item:hover div {
+  text-decoration-line: line-through;
+  font-style: italic;
+}
+
+.shn-input input{
+  color: #fff;
+  background-color: inherit;
+  height: 64px;
+  width: 100%;
+  border: none;
+  font-size: 20px;
+  border-radius: 0px;
+}
+
+.shn-input input:focus {
+  background-color: rgba(255,255,255, 0.2);
+
+}
+
