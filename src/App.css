@@ -71,3 +71,42 @@ p {
 
 }
 
+.auth .ant-input {
+  width: 300px;
+  height: 32px;
+  border-radius: 32px;
+  color: rgb(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.auth .ant-input:focus {
+  border-color: rgb(64, 235, 141);
+}
+
+.auth .ant-input::placeholder {
+  color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.auth .ant-input-affix-wrapper .ant-input {
+  text-align: center;
+}
+
+.auth .ant-modal-content {
+  border-radius: 32px;
+}
+
+.auth p{
+  color: rgb(64, 235, 141);
+}
+
+.auth a{
+  color: rgb(64, 235, 141);
+}
+
+.auth a:hover {
+  color: rgb(64, 235, 141, 0.7);
+}
+
+
+

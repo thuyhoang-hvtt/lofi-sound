@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { Row, Col } from 'antd';
-import SoundIcon from '../../components/SoundIcon/SoundIcon';
+import SoundIcon from './SoundIcon';
 import _ from 'lodash';
 
 // Mock data
 
 
-import { icons } from '../../components/Materials/icons';
-import { sounds } from '../../components/Materials/sounds';
+import { icons } from '../Materials/icons';
+import { sounds } from '../Materials/sounds';
 // This container will request information about sounds
 
 const initialState = {

@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-
 import './App.css';
-import SoundContainer from './containers/SoundContainer/SoundContainer';
-import SideBar from './components/Sidebar/Sidebar';
-import TimerContainer from './containers/TimerContainer/TimerContainer';
-import ComboContainer from './containers/ComboContainer/ComboContainer';
-import TodoContainer from './containers/TodoContainer/TodoContainer';
+
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Home from './routes/Home';
+import Signup from './routes/Signup';
+import Login from './routes/Login';
+
+
 
 class App extends Component {
   render() {
     return (
-      <div >
-        <SideBar token={false}>
-          <TodoContainer/>
-        </SideBar>
-      </div>
+      <Router>
+        <Route path="/" exact component={Home} />
+        <Route path="/signup/" component={Signup} />
+        <Route path="/login/" component={Login} />
+      </Router>
     );
   }
 }
