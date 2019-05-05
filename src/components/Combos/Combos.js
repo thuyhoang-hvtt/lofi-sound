@@ -26,9 +26,9 @@ const ComboButton = ({ combos, ...other }) => {
     <Fragment>
       {
         combos.map((combo, id) => (
-          <Row type="flex" align="middle" justify="center">
+          <Row key={id} type="flex" align="middle" justify="center">
             <Col span={12}>
-              <Button style={comboBtnStyle} shape="round" key={id}>{combo.title}</Button>
+              <Button style={comboBtnStyle} shape="round">{combo.title}</Button>
             </Col>
           </Row>
         ))

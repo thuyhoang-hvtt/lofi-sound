@@ -41,7 +41,7 @@ class TodoContainer extends Component {
           ?
           <Empty/>
           :
-          todos.map(todo => (<TodoItem>{todo}</TodoItem>))
+          todos.map((todo, id) => (<TodoItem key={id}>{todo}</TodoItem>))
         }
       </Fragment>
     );

@@ -4,6 +4,7 @@ import { Icon, Slider, Card } from 'antd';
 
 
 
+
 const initialState = {
   playing: false,
   loop: true,
@@ -25,33 +26,23 @@ const disableStyle = {
 
 
 class SoundIcon extends Component {
-  state = initialState;
 
-  _clickHandler = () => {
-    const { playing } = this.state;
-    this.setState({ playing: !playing })
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.playing !== nextProps.playing;
   }
 
-  _onChange = (value) => {
-    this.setState({ volume: value });
+  componentDidUpdate() {
+    console.log('[SoundIcon] updated!');
   }
 
   render() {
-    const { playing, loop, mute, volume } = this.state;
-    const { src, icon } = this.props;
+    const { order, icon, playing, volume } = this.props;
     return (
       <Fragment >
-        <ReactHowler
-          src={src}
-          playing={playing}
-          loop={loop}
-          mute={mute}
-          volume={volume}
-        />
         <Icon 
           style={playing ? activeStyle : disableStyle} 
           component={icon} 
-          onClick={this._clickHandler}
+          onClick={() => this.props.toggleSound({order, playing})}
         />
         {
           playing &&
@@ -60,7 +51,7 @@ class SoundIcon extends Component {
             max={1.0}
             step={0.01}
             defaultValue={volume}
-            onChange={this._onChange}
+            onChange={value => this.props.changeVolume({order, value})}
             tooltipVisible={false}
           />
         }
@@ -68,5 +59,6 @@ class SoundIcon extends Component {
     );
   }
 }
+
 
 export default SoundIcon;
