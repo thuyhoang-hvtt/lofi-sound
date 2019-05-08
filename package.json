@@ -5,6 +5,8 @@
   "dependencies": {
     "antd": "^3.16.2",
     "babel-plugin-import": "^1.11.0",
+    "cleave.js": "^1.4.10",
+    "firebase": "^5.11.1",
     "less": "^3.9.0",
     "lodash": "^4.17.11",
     "radium": "^0.25.1",
@@ -13,9 +15,11 @@
     "react-dom": "^16.8.6",
     "react-howler": "^3.7.4",
     "react-redux": "^7.0.3",
+    "react-redux-firebase": "^2.2.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
+    "redux-firestore": "^0.7.3",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {

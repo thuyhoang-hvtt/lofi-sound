@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 
 
 class SoundsPlay extends Component {
-
+  componentDidUpdate() {
+    console.log('[SoundsPlay] updated!');
+  }
   render() {
     const { playing, sounds } = this.props;
     return (

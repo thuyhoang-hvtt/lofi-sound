@@ -36,14 +36,15 @@ p {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .shn-todo-item div{
   color: #fff;
-  padding-left: 16px;
-  text-align: left;
+  padding: 0px 16px;
   font-size: 16px;
-  text-transform: capitalize;
 }
 
 .shn-todo-item:hover {
@@ -108,5 +109,11 @@ p {
   color: rgb(64, 235, 141, 0.7);
 }
 
+input.shn-timer::placeholder {
+  color: rgba(242,242,242, 0.5);
+}
 
+input[type="text"], input[type="password"], textarea, select { 
+  outline: none;
+}
 

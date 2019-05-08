@@ -12,9 +12,9 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Route path="/" exact component={Home} />
-        <Route path="/signup/" component={Signup} />
-        <Route path="/login/" component={Login} />
+        <Route path="/" component={Home} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
       </Router>
     );
   }

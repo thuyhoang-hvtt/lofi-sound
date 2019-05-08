@@ -1,7 +1,8 @@
-
 import React, { Component, Fragment } from 'react';
 import { Row, Col, Button, Empty, Checkbox, Input, Icon } from 'antd';
-import Radium from 'radium';
+
+import { addTodo, removeTodo, restoreTodo } from '../../store/actions/lofiActions';
+import { connect } from 'react-redux';
 
 const TodoItem = (props) => (
   <Row type="flex" justify="center">
@@ -13,16 +14,32 @@ const TodoItem = (props) => (
   </Row>
 );
 
-const initState = {
-  todos: ["100 push-ups", "Run 10km", "Squart 100 times"]
-};
 
 class TodoContainer extends Component {
-  state = initState;
+  state = {
+    todo: ''
+  }
+
+  onChange = e => {
+    this.setState({todo: e.target.value})
+  }
+
+  addTodo = () => {
+    const { todo } = this.state;
+    if (todo !== '') {
+      this.props.addTodo(todo);
+      this.setState({todo: ''})
+    }
+  }
+
+  removeTodo = id => {
+    this.props.removeTodo(id);
+  }
+
 
   render() {
-    const { todos } = this.state;
-
+    const { todos } = this.props;
+    const { todo } = this.state;
     return (
       <Fragment>
         <Row type="flex" justify="center" style={{ marginBottom: 64}}>
@@ -33,6 +50,9 @@ class TodoContainer extends Component {
                 <Icon type="caret-right" style={{ fontSize: 24 }}/>
               } 
               placeholder="What should I do?"
+              onChange={this.onChange.bind(this)}
+              onPressEnter={this.addTodo.bind(this)}
+              value={todo}
             />
           </Col>
         </Row>
@@ -41,12 +61,37 @@ class TodoContainer extends Component {
           ?
           <Empty/>
           :
-          todos.map((todo, id) => (<TodoItem key={id}>{todo}</TodoItem>))
+          todos.map((todo, id) => (
+            <Row type="flex" justify="center" key={id}>
+              <Col span={12}>
+                <div
+                  className='shn-todo-item'
+                  onClick={() => this.removeTodo(id)}
+                >
+                  <div>{todo}</div>
+                </div>
+              </Col>
+            </Row>
+          ))
         }
       </Fragment>
     );
   }
 }
 
+const mapStateToProps = state => {
+	return {
+		todos: state.lofi.todos
+	}
+}
 
-export default Radium(TodoContainer);
+const mapDispatchToProps = dispatch => {
+	return {
+		addTodo: todo => dispatch(addTodo(todo)),
+		removeTodo: todo => dispatch(removeTodo(todo)),
+		restoreTodo: todo => dispatch(restoreTodo(todo))
+	}
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer);

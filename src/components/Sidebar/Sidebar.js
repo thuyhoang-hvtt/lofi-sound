@@ -1,6 +1,8 @@
 import React, {Component, Fragment} from 'react';
-import { Layout, Icon, Menu, Row, Col, Button, Switch, Affix } from 'antd';
+import { Layout, Icon, Menu, Row, Col, Button, Affix } from 'antd';
 import { Logo } from '../Logo/Logo';
+
+import { Link } from 'react-router-dom';
 
 const {Header, Content, Sider, Footer} = Layout;
 
@@ -15,6 +17,16 @@ const activeStyle = {
   color: '#fff',
 }
 
+const controlBtnStyle = {
+  fontSize: 24, 
+  width: 40, 
+  height: 40,
+  backgroundColor: 'inherit',
+  borderColor: 'rgba(242,242,242,0.3)',
+  borderWidth: 2,
+  margin: '16px 0'
+};
+
 
 
 class SideBar extends Component {
@@ -23,7 +35,7 @@ class SideBar extends Component {
     const { content, changeContentHandle } = this.props;
     return (
       <Layout className="cover">
-        <Row style={{ background: 'inherit', padding: '32px'}} type="flex" justify="space-between">
+        <Row style={{ background: 'inherit', padding: '32px', minHeight: '150px'}} type="flex" justify="space-between">
           <Col span={4}>
             {
               this.props.token  
@@ -34,18 +46,32 @@ class SideBar extends Component {
                 <Button
                   shape="round" 
                   style={{ marginBottom: '16px', borderWidth: 0, width: '96px', fontWeight: 'bold'}}
-                >Login</Button>
+                >
+                <Link to='/login'>Login</Link>
+                </Button>
                 <span><Button shape="circle" icon="question" style={{ marginLeft: '10px', borderWidth: 0, color: '#fff' }}/></span>
                 <br/>
-                <Button shape="round" style={{ borderWidth: 0, width: '96px', fontWeight: 'bold' }}>Signup</Button>
+                <Button 
+                  shape="round" style={{ borderWidth: 0, width: '96px', fontWeight: 'bold' }}
+                >
+                <Link to='/signup'>Signup</Link>
+                </Button>
               </Affix>
             }
           </Col>
           <Col span={12}>
-            <Logo/>
-            <br/>
-            <p>Improve focus and boost your productivity.</p>
-            <p>Mix different sounds and create your perfect environment.</p>
+            {
+              this.props.token
+              ?
+              null
+              :
+              <div>
+                <Logo/>
+                <br/>
+                <p>Improve focus and boost your productivity.</p>
+                <p>Mix different sounds and create your perfect environment.</p>
+              </div>
+            }
           </Col>
           <Col span={4}>
             <Row type="flex" justify="end" align="top">

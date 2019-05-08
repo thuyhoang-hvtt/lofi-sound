@@ -8,15 +8,21 @@ import Timer from '../components/Timer/Timer';
 import Combos from '../components/Combos/Combos';
 import Todos from '../components/Todos/Todos';
 import SoundsPlay from '../components/SoundList/SoundsPlay';
+import Login from './Login';
+import Signup from './Signup';
 
 
 class Home extends Component {
   state = {
-    content: ''
+    content: 'COMBO_CONTENT'
   }
 
   changeContentHandle = content => {
     this.setState({content: content});
+  }
+
+  componentDidMount() {
+    console.log('[HOME] already have Mounted!');
   }
 
   render() {
@@ -39,7 +45,11 @@ class Home extends Component {
         display = <SoundsUI/>
     }
     return (
-      <SideBar token={true} content={content} changeContentHandle={this.changeContentHandle}>
+      <SideBar 
+        token={true} 
+        content={content} 
+        changeContentHandle={this.changeContentHandle}
+      >
         {display}
         <SoundsPlay/>
       </SideBar>
@@ -47,16 +57,4 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    content: state.lofi.content
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    changeContent: content => dispatch(changeContent(content))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
