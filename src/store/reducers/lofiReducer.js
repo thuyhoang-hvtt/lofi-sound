@@ -70,7 +70,7 @@ const lofiReducer = (state = initState, action) => {
     }
     case 'SET_TIMER':{
       const { isCounting, deadline = 0 } = action.timer;
-      const initial = Date.now()
+      const initial = Date.now(); 
       return Object.assign({}, state, {
         timer: {
           isCounting,

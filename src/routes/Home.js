@@ -14,7 +14,7 @@ import Signup from './Signup';
 
 class Home extends Component {
   state = {
-    content: 'COMBO_CONTENT'
+    content: ''
   }
 
   changeContentHandle = content => {
@@ -27,10 +27,12 @@ class Home extends Component {
 
   render() {
     const { content } = this.state;
+    const { auth } = this.props;
+
     let display;
     switch (content) {
       case 'SOUND_CONTENT':
-        display = <SoundsUI/>
+        display = <SoundsUI uid={auth.uid}/>
         break;
       case 'COMBO_CONTENT':
         display = <Combos/>
@@ -42,19 +44,25 @@ class Home extends Component {
         display = <Todos/>
         break;
       default:
-        display = <SoundsUI/>
+        display = <SoundsUI uid={auth.uid}/>
     }
     return (
       <SideBar 
-        token={true} 
+        uid={auth.uid} 
         content={content} 
         changeContentHandle={this.changeContentHandle}
       >
-        {display}
+        {auth.uid ? display : <SoundsUI/>}
         <SoundsPlay/>
       </SideBar>
     );
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth
+  }
+}
+
+export default connect(mapStateToProps)(Home);

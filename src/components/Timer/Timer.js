@@ -100,7 +100,6 @@ class TimerContainer extends Component {
     clearInterval(this.timer);
     this.props.setTimer({ isCounting: false, deadline: 1 });
     this.setState({
-      percent: 0,
       hour,
       min,
       sec
@@ -142,7 +141,7 @@ class TimerContainer extends Component {
             format={() => (
               isPause 
               ?
-              <div><p style={{fontSize: 40}}>RESUME</p></div>
+              <p style={{fontSize: 40, margin: 'auto'}}>Paused</p>
               :
               <Statistic.Countdown
                 valueStyle={{
@@ -274,7 +273,7 @@ class TimerContainer extends Component {
                 shape="round"
                 onClick={() => this.startCounting(newDeadline + Date.now())}
                 tabIndex="4"
-              >Start</Button>
+              >{isPause ? "Resume" : "Start"}</Button>
             </Col>
           </Row>
         }

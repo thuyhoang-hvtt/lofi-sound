@@ -2,9 +2,20 @@ import React, { Fragment, Component } from 'react';
 import { Card, Modal, Icon, Button, Form, Checkbox, Input, Row } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import Home from './Home';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import firebase from 'firebase';
 
 
 class SignUp extends Component {
+
+  uiConfig = {
+    signInFlow: "popup",
+    signInSuccessUrl: '/',
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID
+    ]
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -70,28 +81,11 @@ class SignUp extends Component {
                 marginBottom: 64
               }}
             >Sign up, it's Free</Button>
-            <br/>
-            <Button
-              style={{
-                backgroundColor: 'rgb(64, 110, 235)',
-                width: 200,
-                heihgt: 32,
-                borderWidth: 0,
-                borderRadius: 25
-              }}
-              icon="facebook"
-            > Facebook</Button>
-            <br/>
-            <Button
-              style={{
-                backgroundColor: 'rgb(194, 71, 71)',
-                width: 200,
-                heihgt: 32,
-                borderWidth: 0,
-                borderRadius: 25
-              }}
-              icon="google"
-            > Google</Button>
+            
+            <StyledFirebaseAuth
+              uiConfig={this.uiConfig}
+              firebaseAuth={firebase.auth()}
+            />
           </Form.Item>
         </Form>
       </Modal>

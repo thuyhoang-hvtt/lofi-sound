@@ -52,6 +52,7 @@ class ComboContainer extends Component {
     const { sounds } = this.props.playing;
     const title = e.target.value;
     this.props.addCombo({ title, sounds });
+    this.props.toggleCombo(this.props.combos.length - 1);
     this.setState({ adding: false });
   }
 
@@ -72,7 +73,7 @@ class ComboContainer extends Component {
   render() {
     const { adding } = this.state;
     const { combos, playing } = this.props;
-    console.log(combos);
+    console.log(playing.title);
     return (
       <Fragment>
         {
@@ -97,7 +98,7 @@ class ComboContainer extends Component {
                 !adding 
                 ?
                 <Button
-                  disabled={playing.sounds.length > 0 ? false : true}
+                  disabled={(playing.sounds.length > 1 && !playing.title) ? false : true}
                   icon="plus" 
                   style={{...comboBtnStyle, backgroundColor: 'inherit', border: '3px dashed'}} 
                   shape="round"

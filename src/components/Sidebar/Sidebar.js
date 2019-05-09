@@ -1,10 +1,13 @@
 import React, {Component, Fragment} from 'react';
 import { Layout, Icon, Menu, Row, Col, Button, Affix } from 'antd';
 import { Logo } from '../Logo/Logo';
-
+import { signOut } from '../../store/actions/authActions';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const {Header, Content, Sider, Footer} = Layout;
+
+
 
 const normalStyle = {
   fontSize: '28px',
@@ -32,13 +35,13 @@ const controlBtnStyle = {
 class SideBar extends Component {
 
   render() {
-    const { content, changeContentHandle } = this.props;
+    const { content, changeContentHandle, uid } = this.props;
     return (
       <Layout className="cover">
         <Row style={{ background: 'inherit', padding: '32px', minHeight: '150px'}} type="flex" justify="space-between">
           <Col span={4}>
             {
-              this.props.token  
+              uid  
               ?
               <Logo/>
               :
@@ -61,7 +64,7 @@ class SideBar extends Component {
           </Col>
           <Col span={12}>
             {
-              this.props.token
+              uid
               ?
               null
               :
@@ -77,15 +80,21 @@ class SideBar extends Component {
             <Row type="flex" justify="end" align="top">
               <Col span={6}><Icon style={normalStyle} type="sound" /></Col>
               <Col span={6}><Icon style={this.props.bkgStop ? normalStyle : activeStyle} type="poweroff"/></Col>
-              {this.props.token && <Col span={6}><Icon style={this.props.account ? activeStyle : normalStyle} type="user"/></Col>}
-              {this.props.token && <Col span={6}><Icon style={normalStyle} type="logout"/></Col>}
+              {uid && <Col span={6}><Icon style={this.props.account ? activeStyle : normalStyle} type="user"/></Col>}
+              {
+                uid 
+                && 
+                <Col span={6}>
+                  <Icon style={normalStyle} type="logout" onClick={this.props.signOut}/>
+                </Col>
+              }
             </Row>
           </Col>
         </Row>
         <Row type="flex" justify="space-around">
           <Col span={2}>
             {
-              this.props.token 
+              uid 
               &&
               <Fragment>
                 <Affix offsetTop={100} style={{textAlign: 'center', padding: '10px 0'}}>
@@ -155,5 +164,11 @@ class SideBar extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    signOut: () => dispatch(signOut())
+  }
+}
+ 
 
-export default SideBar;
+export default connect(null, mapDispatchToProps)(SideBar);

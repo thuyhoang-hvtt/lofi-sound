@@ -3,6 +3,7 @@ import { Card, Modal, Icon, Button, Form, Checkbox, Input, Row } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import Home from './Home';
 
+
 class Login extends Component {
 
   handleSubmit = (e) => {
@@ -58,28 +59,7 @@ class Login extends Component {
                 marginBottom: 64
               }}
             >Enjoy, Now!</Button>
-            <br/>
-            <Button
-              style={{
-                backgroundColor: 'rgb(64, 110, 235)',
-                width: 200,
-                heihgt: 32,
-                borderWidth: 0,
-                borderRadius: 25
-              }}
-              icon="facebook"
-            > Facebook</Button>
-            <br/>
-            <Button
-              style={{
-                backgroundColor: 'rgb(194, 71, 71)',
-                width: 200,
-                heihgt: 32,
-                borderWidth: 0,
-                borderRadius: 25
-              }}
-              icon="google"
-            > Google</Button>
+            
           </Form.Item>
           <Form.Item>
             <Link to='/signup' style={{marginRight: 32}}>Create an account</Link>

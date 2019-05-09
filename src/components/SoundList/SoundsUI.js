@@ -60,85 +60,88 @@ class SoundsUI extends Component {
   }
 
   render() {
-    const { playing, icons, timer } = this.props;
+    const { playing, icons, timer, uid } = this.props;
     const { saving } = this.state;
     return (
       <Fragment>
-      <Row type="flex" justify="center" style={{ marginBottom: 64 }}>
-        { 
-          playing.title 
-          ?
-          <Col span={8}>
-            <Button 
-              style={{...controlBtnStyle, backgroundColor: 'inherit', borderWidth: 3 }} 
-              shape="round"
-              onClick={() => this.props.toggleCombo(playing.combo)}
-            >
-              {playing.title}
-            </Button>
-          </Col>
-          :
-          (
-            playing.sounds.length < 2 
-            ? 
+      {
+        uid 
+        && 
+        <Row type="flex" justify="center" style={{ marginBottom: 64 }}>
+          { 
+            playing.title 
+            ?
             <Col span={8}>
-              <Button style={controlBtnStyle} shape="round">Favourites</Button>
+              <Button 
+                style={{...controlBtnStyle, backgroundColor: 'inherit', borderWidth: 3 }} 
+                shape="round"
+                onClick={() => this.props.toggleCombo(playing.combo)}
+              >
+                {playing.title}
+              </Button>
             </Col>
             :
             (
-              !saving
-              ?
-              <Fragment>
-                <Col span={4}>
-                  <Button 
-                    style={{...controlBtnStyle, width: 170}} 
-                    shape="round"
-                    onClick={this.toggleSaving.bind(this)}
-                  >Save</Button>
-                </Col>
-                <Col span={4}>
-                  <Button style={{...controlBtnStyle, width: 170}} shape="round">Share</Button>
-                </Col>
-              </Fragment>
-              :
+              playing.sounds.length < 2 
+              ? 
               <Col span={8}>
-                <Input 
-                  autoFocus 
-                  style={inputStyle} 
-                  onPressEnter={this.addCombo.bind(this)} 
-                  onBlur={this.toggleSaving.bind(this)}
-                />
+                <Button style={controlBtnStyle} shape="round">Favourites</Button>
               </Col>
+              :
+              (
+                !saving
+                ?
+                <Fragment>
+                  <Col span={4}>
+                    <Button 
+                      style={{...controlBtnStyle, width: 170}} 
+                      shape="round"
+                      onClick={this.toggleSaving.bind(this)}
+                    >Save</Button>
+                  </Col>
+                  <Col span={4}>
+                    <Button style={{...controlBtnStyle, width: 170}} shape="round">Share</Button>
+                  </Col>
+                </Fragment>
+                :
+                <Col span={8}>
+                  <Input 
+                    autoFocus 
+                    style={inputStyle} 
+                    onPressEnter={this.addCombo.bind(this)} 
+                    onBlur={this.toggleSaving.bind(this)}
+                  />
+                </Col>
+              )
             )
-          )
-        }
-        {
-          timer.isCounting 
-          ?
-          <Fragment>
-            <Col span={6}>
-            <Button style={{...controlBtnStyle, backgroundColor: 'inherit', width: 200, borderWidth: 3 }} shape="round">
-              <Statistic.Countdown 
-                value={timer.deadline}
-                onFinish={() => this.props.setTimer({ isCounting: false})}
-              />
-            </Button>
+          }
+          {
+            timer.isCounting 
+            ?
+            <Fragment>
+              <Col span={6}>
+              <Button style={{...controlBtnStyle, backgroundColor: 'inherit', width: 200, borderWidth: 3 }} shape="round">
+                <Statistic.Countdown 
+                  value={timer.deadline}
+                  onFinish={() => this.props.setTimer({ isCounting: false})}
+                />
+              </Button>
+              </Col>
+              <Col span={2}>
+                <Button 
+                  style={{...controlBtnStyle, width: 100}} 
+                  shape="round"
+                  onClick={() => this.props.setTimer({ isCounting: false })}
+                >Stop</Button>
+              </Col>
+            </Fragment>
+            :
+            <Col span={8}>
+              <Button style={controlBtnStyle} shape="round">Timer</Button>
             </Col>
-            <Col span={2}>
-              <Button 
-                style={{...controlBtnStyle, width: 100}} 
-                shape="round"
-                onClick={() => this.props.setTimer({ isCounting: false })}
-              >Stop</Button>
-            </Col>
-          </Fragment>
-          :
-          <Col span={8}>
-            <Button style={controlBtnStyle} shape="round">Timer</Button>
-          </Col>
-        }
-      </Row>
-      
+          }
+        </Row>
+      }
       {
         [...Array(Math.ceil(icons.length / 2)).keys()].map( row => (
           <Row 
